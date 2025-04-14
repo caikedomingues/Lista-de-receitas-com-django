@@ -24,10 +24,12 @@ from django.urls import path
 
 urlpatterns = [
     
-    # Rota padrão do django
+    # Rota para admins do django
     path('admin/', admin.site.urls),
     
     # Incluindo o arquivo urls.py do nosso app
-    # na urls do projeto raiz.
-    path('receitas', include('receitas.urls')),
+    # na urls do projeto raiz. O vázio significa que 
+    # não é necessário passar nenhum argumento na 
+    # rota para acessar o sistema
+    path('', include('receitas.urls')),
 ]

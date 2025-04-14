@@ -1,0 +1,32 @@
+
+
+<!--Template html da nossa página de cadastro de usuários-->
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale 1.0">
+        <meta http-equiv="X-UA Compatible" content="IE=edge">
+    </head>
+
+    <body>
+        <h1>Cadastro de clientes</h1>
+
+        <!--Criação do formulário de cadastro: Ira enviar os dados para a própria páginae terá como método o post para envio de dados
+        no sistema-->
+        <form action = "{%url 'cadastroUsuario'%}" method="post">
+            
+            <!--Irá garantir que todas as requisições venham apenas
+            do nosso sistema-->
+            {% csrf_token %}
+
+            <!--Ira formatar os dados como paragráfo-->
+            {{form.as_p}}
+
+            <!--Criação do botão que irá enviar os dados para o servidor-->
+            <button type="submit"> Cadastrar</button>
+        
+
+        </form>
+    </body>
+</html>
