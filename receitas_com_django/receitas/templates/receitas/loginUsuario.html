@@ -1,0 +1,34 @@
+
+
+<!--Template HTML do formulário de login dos usuários-->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale 1.0">
+        <meta http-equiv="X-UA Compatible" content="IE=edge">
+    </head>
+
+
+    <body>
+
+        <h1>Por favor, faça o seu login</h1>
+        <!--Criação do formulário de login dos usuários: O formulário enviara as informações para a URL da própria página e terá
+        como método o POST que enviará as infromações ao servidor.-->
+        <form action="{%url 'loginUsuario'%}" method="post">
+
+            <!--Token que ira garantir que todas as requisições
+            ao servidor do django venham da nossa própria página.-->
+            {%csrf_token%}
+
+            <!--Formatando os dados do dicionário como paragráfo.-->
+            {{form.as_p}}
+
+            <!--Criação do botão de envio dos dados-->
+            <button type="submit">Entrar</button>
+
+        </form>
+
+    </body>
+</html>

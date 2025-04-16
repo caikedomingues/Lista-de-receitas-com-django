@@ -11,7 +11,9 @@ urlpatterns = [
     
     # Criando a rota para a view da página inicial
     # que irá conter todas as receitas criadas pelos
-    # usuários.
+    # usuários. Se a rota estiver vázia, ou seja, sem
+    # nenhum argumento após a barra, ela irá automaticamente
+    # para a página inicial
     path('', views.index, name='index'),
     
     # Criando a rota para a view de cadstro de usuários 
@@ -19,6 +21,8 @@ urlpatterns = [
     path('cadastroUsuario', views.cadastroUsuario, name='cadastroUsuario'),
     
     # Criação da rota para a página de login.
-    path('login', views.login, name='login')
+    path('loginUsuario', views.loginUsuario, name='loginUsuario'),
+    
+    path('criarReceita', views.criarReceita, name='criarReceita')
     
 ]
