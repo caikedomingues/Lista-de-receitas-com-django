@@ -15,12 +15,24 @@ from .forms import CadastroUsuarioForm
 from .forms import FormularioLogin
 
 # Import do formulário de inserção de receitas
-
 from .forms import FormularioCriacaoReceita
 
+# Função do módulo django.contrib.auth. Sua principal responsabilidade
+# é verificar as credenciais de um usuário (geralmente um nome de usuário
+# e uma senha) em relação aos backends de autenticação configurados no
+# seu projeto Django. Essa função tenta autenticar o usuário usando cada
+# backend de autenticação configurado em settings.py (na lista AUTHENTICA
+# TION_BACKENDS). Ele retorna um objeto User se as credenciais forem válidas
+# para algum dos backends, ou None se as credenciais forem inválidas.
 from django.contrib.auth import authenticate
 
+# Esta função tem como objetivo estabelecer uma sessão de login para
+# usuários que estão autenticados. A função irá receber um objeto
+# HttpRequest e um objeto User autenticado como argumentos. Ele 
+# armazena o ID do usuário na sessão do usuário, marcando-o como
+# logado para as requisições subsequentes.
 from django.contrib.auth import login
+
 # Create your views here.
 
 
@@ -128,3 +140,57 @@ def loginUsuario(request):
     # variáveis da view sejam acessadas no HTML
     return render(request, 'receitas/loginUsuario.html', {'form':form})
     
+
+# Função que irá inserir receitas no banco de dados do sistema. A função
+# irá receber como parametro apenas o request que lida com as requisições
+def criarReceita(request):
+    
+    # Antes de iniciarmos qualquer ação, vamos verificar o tipo
+    # de requisição feita pelo usuário.
+    if request.method == 'POST':
+        
+        # Se a requisição for do tipo POST (requisição que insere dados
+        # no sistema), vamos enviar os dados informados pro formulário.
+        form = FormularioCriacaoReceita(request.POST)
+            
+        # Após o envio dos dados, vamos verificar se eles seguem as regras
+        # definidas no forms.py
+        if form.is_valid():
+            
+            # Como nesse caso temos que associar um usuário a criação de uma 
+            # receita, vamos inserir os dados de uma maneira um pouco diferente
+            # Primeiro, vamos dar  um commit=False no método save para o form
+            # não enviar os dados para o banco de dados, com o objetivo de mante-los
+            # apenas no formulário. Dessa maneira, teremos tempo de realizar algumas
+            # validações.
+            receita = form.save(commit=False)
+            
+            # Vamos associar a criação da receita ao usuário logado.
+            receita.dono_receita = request.user
+            
+            # Após a associação, vamos enviar os dados para o banco de dados
+            # e registrar a receita no sistema
+            receita.save()
+            
+            # Após o envio dos dados vamos direcionar o usuário para a página
+            # inicial com o objetivo dele ver todas as receitas cadastradas por
+            # ele e pelas outras pessoas
+            return redirect('index')
+        
+        else:
+            
+            # Se os dados não forem validos, vamos chamar a função
+            # que tem como objetivo tratar e informar erros de forms
+            # no sistema.
+            form.add_error(None, "Falha na criação da receita")
+    
+    else:
+        
+        # Se a requisição não for um POST, vamos instanciar um formulário
+        # em branco pro usuário adicionar informações.
+        form = FormularioCriacaoReceita()
+    
+    # Retorno da renderização do sistema com a requisição, a rota da 
+    # página html e o dicionário que irá possibilitar o acesso das
+    # variáveis no HTML.
+    return render(request, 'receitas/criarReceita.html', {'form':form})
