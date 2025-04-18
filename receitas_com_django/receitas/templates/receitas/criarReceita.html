@@ -25,7 +25,7 @@
         <!--Fprmulário de inserção de receitas: O formulário irá enviar
         os dados para a própria página e terá como  método de envio O
         post que insere dados no servidor-->
-        <form action = "{%url 'criarReceita'%}" method="post">
+        <form action = "{%url 'criarReceita'%}" method="post" enctype="multipart/form-data">
 
             <!--Token que irá garantir que todas as requisições venham
             apenas do nosso sistema.-->

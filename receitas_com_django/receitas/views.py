@@ -170,8 +170,10 @@ def criarReceita(request):
     if request.method == 'POST':
         
         # Se a requisição for do tipo POST (requisição que insere dados
-        # no sistema), vamos enviar os dados informados pro formulário.
-        form = FormularioCriacaoReceita(request.POST)
+        # no sistema), vamos enviar os dados informados pro formulário
+        # através de uma requisição POST (que envia os dados do usuário)
+        # e do método FILES (envia a imagem para o formulário).
+        form = FormularioCriacaoReceita(request.POST, request.FILES)
             
         # Após o envio dos dados, vamos verificar se eles seguem as regras
         # definidas no forms.py

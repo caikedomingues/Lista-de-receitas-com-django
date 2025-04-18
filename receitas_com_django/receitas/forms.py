@@ -80,14 +80,15 @@ class FormularioCriacaoReceita(forms.ModelForm):
         model = Receitas
         
         # Campos do formulário
-        fields = ['titulo', 'ingredientes', 'modo_preparo']
+        fields = ['titulo', 'ingredientes', 'modo_preparo', 'imagem']
         
         # Rótulos dos campos do formulário
         labels = {
             
             'titulo':'Titulo da receita',
             'ingredientes':'Ingredientes',
-            'modo_preparo': 'Modo de Preparo'
+            'modo_preparo': 'Modo de Preparo',
+            'imagem': 'Imagem da receita'
         }
         
         # Widgets: É um dicionário especial dentro da classe Meta de um

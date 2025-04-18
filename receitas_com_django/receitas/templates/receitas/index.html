@@ -6,35 +6,49 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale 1.0">
-        <meta http-eqiv="X-UA Compatible" content="IE=edge">
+        <meta http-equiv="X-UA Compatible" content="IE=edge">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     </head>
 
     <body>
         <h1>Receitas</h1>
 
-        <a href="{%url 'criarReceita'%}">Registre uma nova receita</a>
+        <a href="{%url 'criarReceita'%}" class="btn btn-primary mb-3">Registre uma nova receita</a>
 
         {%if receitas%}
 
-            {%for receita in receitas%}
-            <section>
-                <p>Titulo: {{receita.titulo}}</p>
+            <div class="row">
+                {%for receita in receitas%}
+                  <div class="col-md-6 mb-4">
+                    <div class="card">
+                        {%if receita.imagem%}
 
-                <p>Ingredientes: {{receita.ingredientes}}</p>
+                          <img src="{{receita.imagem.url}}" class="card-img-top" alt="imagem da receita">
+                        
+                        {%endif%}
+                        <div class="card-body">
 
-                <p>Modo de Preparo: {{receita.modo_preparo}}</p>
+                            <h5 class="card-title">Titulo: {{receita.titulo}}</h5>
 
-                <p>Autor: {{receita.dono_receita.username}}</p>
-            </section>
-        
-           {%endfor%}
+                            <p class="card-text"><strong>Ingredientes</strong>: {{receita.ingredientes}}</p>
 
+                            <p><strong>Modo de Preparo</strong>: {{receita.modo_preparo}}</p>
+
+                            <p><strong>Autor</strong>: {{receita.dono_receita.username}}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                {%endfor%}
+           
         {%else%}
 
-            <p>Ainda não há receitas cadastradas</p>
+            <p class="alert alert-info">Ainda não há receitas cadastradas</p>
         
         {%endif%}
 
-        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+
     </body>
 </html>
