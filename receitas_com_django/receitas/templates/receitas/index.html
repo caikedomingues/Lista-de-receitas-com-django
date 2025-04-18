@@ -1,3 +1,40 @@
 
 
-<h1>Receitas</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale 1.0">
+        <meta http-eqiv="X-UA Compatible" content="IE=edge">
+    </head>
+
+    <body>
+        <h1>Receitas</h1>
+
+        <a href="{%url 'criarReceita'%}">Registre uma nova receita</a>
+
+        {%if receitas%}
+
+            {%for receita in receitas%}
+            <section>
+                <p>Titulo: {{receita.titulo}}</p>
+
+                <p>Ingredientes: {{receita.ingredientes}}</p>
+
+                <p>Modo de Preparo: {{receita.modo_preparo}}</p>
+
+                <p>Autor: {{receita.dono_receita.username}}</p>
+            </section>
+        
+           {%endfor%}
+
+        {%else%}
+
+            <p>Ainda não há receitas cadastradas</p>
+        
+        {%endif%}
+
+        
+    </body>
+</html>

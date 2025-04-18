@@ -1,6 +1,6 @@
 
 
-<!--Template HTML do formulário de inserção de dados-->
+<!--Template HTML do formulário de inserção de receitas.-->
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -12,13 +12,30 @@
     <body>
         <h1>Registre aqui a sua receita</h1>
 
-        <!--Fprmulário de inserção de receitas-->
+        <!--Irá acessar a variável que contém a mensagem de boas-vindas
+        para o usuários-->
+        <p>{{mensagem}}</p>
+
+        <!--Link que direciona o usuário para o logout do sistema-->
+        <p><a href="{%url 'logoutUsuario'%}">Sair do sistema</a></p>
+        
+        <!--Link para voltar a página de receitas-->
+        <p><a href="{%url 'index'%}">Voltar para a página de receitas</a></p>
+
+        <!--Fprmulário de inserção de receitas: O formulário irá enviar
+        os dados para a própria página e terá como  método de envio O
+        post que insere dados no servidor-->
         <form action = "{%url 'criarReceita'%}" method="post">
 
+            <!--Token que irá garantir que todas as requisições venham
+            apenas do nosso sistema.-->
             {%csrf_token%}
 
+            <!--Ira formatar os dados (que estão acessados via o dicionário
+            que foi definido na view de criações de receitas) como paragráfo-->
             {{form.as_p}}
 
+            <!--Ira criar o botão de envio de dados.-->
             <button type="submit">Criar Receita</button>
 
         </form>

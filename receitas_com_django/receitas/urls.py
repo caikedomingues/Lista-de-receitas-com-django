@@ -23,6 +23,8 @@ urlpatterns = [
     # Criação da rota para a página de login.
     path('loginUsuario', views.loginUsuario, name='loginUsuario'),
     
-    path('criarReceita', views.criarReceita, name='criarReceita')
+    path('criarReceita', views.criarReceita, name='criarReceita'),
+    
+    path('logoutUsuario', views.logoutUsuario, name='logoutUsuario')
     
 ]

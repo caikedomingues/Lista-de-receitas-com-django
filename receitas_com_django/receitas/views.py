@@ -33,15 +33,32 @@ from django.contrib.auth import authenticate
 # logado para as requisições subsequentes.
 from django.contrib.auth import login
 
+# Import da função login_required que tem como objetivo verificar
+# no sistema se há ou não um usuário logado. Caso a função não
+# identifique nenhum usuário no sistema, ela irá direcionar o
+# usuário para a url que for definida no settings.py
+from django.contrib.auth.decorators import login_required
+
+# Import da função que encerra a sessão do usuário e o desloga do sistema
+from django.contrib.auth import logout
+
+# Import da classe Receitas que iremos utilizar para listar
+# todas as receitas cadastradas pelo usuário. A classe se encontra
+# no módulo models.py do nosso app. Esse arquivo serve para criar
+# todas as tabelas (classes) do nosso banco de dados.
+from .models import Receitas
+
 # Create your views here.
 
 
 
 def index(request):
     
+    receitas = Receitas.objects.all()
     
+    dicionario_receitas = {'receitas':receitas}
     
-    return render(request, 'receitas/index.html')
+    return render(request, 'receitas/index.html', dicionario_receitas)
 
 
 # Criação do método que irá criar os formulários de cadastro de usuários
@@ -119,6 +136,7 @@ def loginUsuario(request):
                 # dessa maneira, as ações dele não irão afetar outros usuários.
                 login(request, user)
                 
+                
                 # Após realizar o login, o sistema ira direcionar o
                 # usuário para a página de inserção de receitas
                 return redirect ('criarReceita')
@@ -141,6 +159,8 @@ def loginUsuario(request):
     return render(request, 'receitas/loginUsuario.html', {'form':form})
     
 
+# Ira permitir que apenas usuários autenticados acessem a página
+@login_required
 # Função que irá inserir receitas no banco de dados do sistema. A função
 # irá receber como parametro apenas o request que lida com as requisições
 def criarReceita(request):
@@ -190,7 +210,24 @@ def criarReceita(request):
         # em branco pro usuário adicionar informações.
         form = FormularioCriacaoReceita()
     
+    # Iraimprimir uma mensagem acessando o nome do usuário logado.
+    mensagem = f"Olá {request.user.username}"
+    
     # Retorno da renderização do sistema com a requisição, a rota da 
     # página html e o dicionário que irá possibilitar o acesso das
     # variáveis no HTML.
-    return render(request, 'receitas/criarReceita.html', {'form':form})
+    return render(request, 'receitas/criarReceita.html', {'form':form, 'mensagem':mensagem})
+
+
+
+# função que irá encerrar a sessão do usuário no sistema
+def logoutUsuario(request):
+    
+    # Basta chamarmos a função logout passando como parametro a
+    # requisição de logout do usuário
+    logout(request)
+    
+    # Após encerrar a sessão iremos direcionar o usuário para a página
+    # inicial que todos os usuários (inclusive os não autenticados) podem
+    # acessar livremente.
+    return redirect('index')
