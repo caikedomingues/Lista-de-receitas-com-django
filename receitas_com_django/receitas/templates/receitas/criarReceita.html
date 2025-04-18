@@ -1,5 +1,6 @@
 
 
+<!--Template HTML do formulário de inserção de dados-->
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -11,6 +12,7 @@
     <body>
         <h1>Registre aqui a sua receita</h1>
 
+        <!--Fprmulário de inserção de receitas-->
         <form action = "{%url 'criarReceita'%}" method="post">
 
             {%csrf_token%}
