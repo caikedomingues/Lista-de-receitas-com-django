@@ -47,7 +47,7 @@ class Receitas(models.Model):
     # excluido do sistema.
     dono_receita = models.ForeignKey(User, on_delete=models.CASCADE)
     
-    # Ira possibilitar que o usuário envie as imagens das receitas no sistema.
+    # Ira possibilitar que o usuário envie as imagens das receitas no sistema .
     imagem = models.ImageField(upload_to='receitas/imagens')
 
 
