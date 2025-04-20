@@ -1,0 +1,14 @@
+
+/*Nesse arquivo iremos fazer apenas algumas estilizações
+de forma manual*/
+
+/* Irá centralizar o titulo*/
+h1{
+
+    text-align: center;
+}
+
+/*Irá centralizar o botão*/
+.botao{
+    text-align: center;
+}

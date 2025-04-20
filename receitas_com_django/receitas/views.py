@@ -51,13 +51,21 @@ from .models import Receitas
 # Create your views here.
 
 
-
+# Ira realizar as requisições GET ao servidor com o objetivo
+# de mostrar os dados registrados no sistema. A função irá
+# receber como argumento apenas o request que lida com requisições
 def index(request):
     
+    # Ira pegar no banco de dados todos os objetos
+    # cadastradados (um select).
     receitas = Receitas.objects.all()
     
+    # Após coletar os dados, vamos atribui-los a um dicionário
+    # que possibilitará o acesso dos valores nos templates HTML.
     dicionario_receitas = {'receitas':receitas}
     
+    # Retorno da funçãop render que irá conter a requisição ao servidor,
+    # o caminho do template HTML e o dicionário com os valores.
     return render(request, 'receitas/index.html', dicionario_receitas)
 
 
