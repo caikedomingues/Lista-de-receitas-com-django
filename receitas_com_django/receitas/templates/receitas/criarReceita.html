@@ -7,37 +7,77 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale 1.0">
         <meta http-equiv="X-UA Compatible" content="IE=edge">
+
+        <!--Link para conectar ao cdn do framework Bootstrap que irá gerar classes que irão estilizar a nossa página-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+
+        <!--No django, arquivos estatiscos como imagens e CSS 
+        devem ficar armazenados em uma pasta chamada 'static' 
+        (que tem uma estrutura/organização igual a da pasta de
+        templates), pois, a pasta de templates armazena apenas
+        arquivos HTML.-->
+
+        <!--Para acessar os arquivos estatiticos precisamos carregar a pasta static no nosso template HTML.-->
+        {%load static%}
+ 
+        <!--Vamos acessar o icone que está na pasta de imagens
+        da pasta de arquivos estatiscos (static) para coloca-lo
+        como icone da guia no navegador. -->
+        <link rel="shortcut icon" href="{%static 'receitas/imagensStatic/icone.jpg'%}">
+
+
     </head>
 
-    <body>
-        <h1>Registre aqui a sua receita</h1>
+    <body class="bg-light">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
 
-        <!--Irá acessar a variável que contém a mensagem de boas-vindas
-        para o usuários-->
-        <p>{{mensagem}}</p>
+                    <!--Classe do bootstrap que irá centralizar e alterar a fonte do titulo-->
+                    <h1 class="mb-4">Registre aqui a sua receita</h1>
 
-        <!--Link que direciona o usuário para o logout do sistema-->
-        <p><a href="{%url 'logoutUsuario'%}">Sair do sistema</a></p>
-        
-        <!--Link para voltar a página de receitas-->
-        <p><a href="{%url 'index'%}">Voltar para a página de receitas</a></p>
+                    <!--Classe do bootstrap que irá centralizar
+                    o paragrafo e transforma-lo em um alert -->
+                   <div class="alert alert-info" role="alert">
+                        <!--Irá acessar a variável que contém a mensagem de boas-vindas
+                        para o usuários-->
+                        <p>{{mensagem}}</p>
 
-        <!--Fprmulário de inserção de receitas: O formulário irá enviar
-        os dados para a própria página e terá como  método de envio O
-        post que insere dados no servidor-->
-        <form action = "{%url 'criarReceita'%}" method="post" enctype="multipart/form-data">
+                   </div>
 
-            <!--Token que irá garantir que todas as requisições venham
-            apenas do nosso sistema.-->
-            {%csrf_token%}
+                    <!--Link que direciona o usuário para o logout do sistema. A classe do boostrap irá transformar
+                    o link em um botão que muda de cor quando O
+                    usuário clica nele (botão interativo)-->
+                    <p><a href="{%url 'logoutUsuario'%}" class="btn btn-outline-danger me-2">Sair do sistema</a></p>
+                    
+                    <!--Link para voltar a página de receitas. 
+                    A classe do boostrap irá transformar
+                    o link em um botão que muda de cor quando O
+                    usuário clica nele(botão interativo)-->
+                    <p><a href="{%url 'index'%}" class="btn btn-outline-secondary">Voltar para a página de receitas</a></p>
 
-            <!--Ira formatar os dados (que estão acessados via o dicionário
-            que foi definido na view de criações de receitas) como paragráfo-->
-            {{form.as_p}}
+                    <!--Fprmulário de inserção de receitas: O formulário irá enviar
+                    os dados para a própria página e terá como  método de envio O
+                    post que insere dados no servidor. A classe do bootstrap irá centralizar os elementos do usuário na página-->
+                    <form action = "{%url 'criarReceita'%}" method="post" enctype="multipart/form-data" class="mt-4">
 
-            <!--Ira criar o botão de envio de dados.-->
-            <button type="submit">Criar Receita</button>
+                        <!--Token que irá garantir que todas as requisições venham
+                        apenas do nosso sistema.-->
+                        {%csrf_token%}
 
-        </form>
+                        <!--Ira formatar os dados (que estão acessados via o dicionário
+                        que foi definido na view de criações de receitas) como paragráfo-->
+                        {{form.as_p}}
+
+                        <!--Ira criar o botão de envio de dados. A classe do boostrap irá alterar a cor do botão.-->
+                        <button type="submit" class="btn btn-primary">Criar Receita</button>
+
+                    </form>
+        </div>
+           </div>
+              </div>
+            
+        <!--Link do javascript do bootstrap que manipula elementos do design da página como animações, botões interativos, etc.-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     </body>
 </html>
