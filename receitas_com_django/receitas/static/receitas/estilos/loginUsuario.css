@@ -1,0 +1,14 @@
+
+/*Vamos fazer alguns ajustes de forma manual. Como o formulário
+foi gerado pela biblioteca forms do Django, ou seja, não criei
+manualmente os labels e inputs do formulário, precisamos inspecionar
+a página para descobrir o id atribuido aos rótulos e campos da página
+de login.*/
+
+/*Vamos acessar o id do input (campo) de senha para dar um margin-left
+com o objetivo de alinhar o posicionamento dos campos.*/
+#id_password{
+
+        margin-left: 80px;
+
+}

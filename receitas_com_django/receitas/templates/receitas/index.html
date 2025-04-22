@@ -21,9 +21,12 @@
         arquivos HTML -->
         <!--Para conseguirmos fazer o link funcionar, iremos carregar 
         pasta static que criamos no nosso app.-->
-
         {%load static%}
-        <link rel="stylesheet" href="{%static 'receitas/inicio.css'%}">
+        <link rel="stylesheet" href="{%static 'receitas/estilos/inicio.css'%}">
+
+        <!--Como as imagens são arquivos estatisticos, temos que criar
+        o link que adiciona icones utilizando o arquivo static (que irá conter todos os arquivos estátiscos).-->
+        <link rel="shortcut icon" href="{%static 'receitas/imagensStatic/icone.jpg'%}">
     </head>
 
     <body>
